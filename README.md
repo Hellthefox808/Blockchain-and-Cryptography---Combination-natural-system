@@ -5,9 +5,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
-An end-to-end engineered, cryptographically validated blockchain platform demonstrating the combination of distributed ledger technology with modern asymmetric and hash-based cryptography.
+![Blockchain and Cryptography Combo Nature System Hero Banner](docs/images/hero_banner.jpg)
+
+An end-to-end engineered, cryptographically validated blockchain platform demonstrating the symbiotic combination of distributed ledger technology with modern asymmetric and hash-based cryptography.
 
 Originally initiated as an academic project concept, this codebase was inherited and subsequently re-architected, implemented, hardened, tested, and packaged into a production-ready system as part of my engineering responsibility.
+
+---
+
+## Highlights & Key Capabilities
+
+- **Strict Cryptographic Avalanche Effect**: Computes 256-bit Hamming distances and bit divergence percentages to demonstrate mathematical diffusion.
+- **Asymmetric ECDSA SECP256k1 Security**: Complete elliptic curve public-key cryptography, DER-encoded digital signatures, and deterministic wallet address derivation (`0x...`).
+- **Binary Merkle Trees & SPV Proofs**: Pairwise SHA-256 tree aggregation with Bitcoin-standard odd leaf replication and $O(\log N)$ inclusion verification.
+- **Proof-of-Work (PoW) Consensus Engine**: Configurable difficulty hashing, coinbase block rewards, and unspent balance validation.
+- **Interactive Cyberpunk Dashboard**: Modern dark-mode glassmorphic single-page web UI featuring a live blockchain explorer, wallet generator, transaction studio, interactive PoW miner, and consensus attack simulator.
+- **100% Executable 9-Module Notebook**: Complete educational Jupyter notebook (`BlockchainProject_D.ipynb`) with zero broken stubs and embedded live execution outputs.
+- **27 Automated Tests**: Pytest suite spanning unit, integration, cryptographic, and API levels with 100% pass rate.
 
 ---
 
@@ -33,6 +47,10 @@ Originally initiated as an academic project concept, this codebase was inherited
 ---
 
 ## 1. System Architecture
+
+![System Architecture Diagram](docs/images/system_architecture.jpg)
+
+The system follows a strict modular 4-tier architecture isolating user interactions, consensus logic, cryptographic primitives, and persistent storage:
 
 ```text
 +-------------------------------------------------------------------------------+
@@ -69,6 +87,8 @@ Originally initiated as an academic project concept, this codebase was inherited
 ---
 
 ## 2. Cryptographic Foundations
+
+![Cryptographic Lab and Avalanche Effect Analysis](docs/images/cryptography_avalanche_lab.jpg)
 
 ### SHA-256 & The Avalanche Effect
 
