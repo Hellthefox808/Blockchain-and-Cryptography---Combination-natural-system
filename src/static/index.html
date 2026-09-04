@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blockchain & Cryptography Combo Nature System</title>
+  <meta name="description" content="End-to-End Cryptographic Blockchain Platform featuring SHA-256 Avalanche Analysis, ECDSA Digital Signatures, Merkle Tree Verification, and PoW Consensus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <path d="M7 12h10M12 7v10" />
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>COMBO NATURE SYSTEM</h1>
+          <span>Blockchain & Cryptography Architecture</span>
+        </div>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat-pill">
+          <span class="label">Blocks:</span>
+          <span class="value" id="stat-height">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="label">Difficulty:</span>
+          <span class="value" id="stat-difficulty">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="label">Mempool:</span>
+          <span class="value" id="stat-mempool">0</span>
+        </div>
+        <div id="status-badge" class="status-badge valid">
+          <span class="status-dot"></span>
+          <span id="status-text">CHAIN SECURE</span>
+        </div>
+        <button id="btn-refresh" class="btn btn-secondary btn-sm" title="Refresh state">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <div class="nav-tabs-container">
+      <button class="tab-btn active" data-tab="tab-explorer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Ledger Explorer
+      </button>
+      <button class="tab-btn" data-tab="tab-wallet">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4M4 6v12a2 2 0 002 2h14v-4"/><circle cx="16" cy="14" r="2"/></svg>
+        Wallet Studio
+      </button>
+      <button class="tab-btn" data-tab="tab-transaction">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        Transaction Hub
+      </button>
+      <button class="tab-btn" data-tab="tab-mining">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Mining Center
+      </button>
+      <button class="tab-btn" data-tab="tab-crypto">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Cryptographic Lab
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Tab 1: Ledger Explorer -->
+    <section id="tab-explorer" class="tab-pane active">
+      <div class="glass-card">
+        <div class="card-header">
+          <div>
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Cryptographic Blockchain Timeline
+            </h2>
+            <div class="header-desc">Horizontally scrolling chain of immutably linked blocks. Each block references the SHA-256 hash of its predecessor.</div>
+          </div>
+          <div>
+            <button id="btn-validate-chain" class="btn btn-secondary btn-sm">Audit Chain Integrity</button>
+          </div>
+        </div>
+        <div id="chain-container" class="chain-timeline">
+          <!-- Block cards rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Block Details Drawer / Panel -->
+      <div id="block-detail-panel" class="glass-card hidden">
+        <div class="card-header">
+          <h2 id="detail-block-title">Block #0 Details</h2>
+          <button id="btn-close-detail" class="btn btn-secondary btn-sm">Close</button>
+        </div>
+        <div class="grid-2">
+          <div>
+            <h3 class="panel-header-accent">Block Header</h3>
+            <div class="form-group">
+              <label for="detail-block-hash">Block Hash (SHA-256):</label>
+              <div id="detail-block-hash" class="code-box"></div>
+            </div>
+            <div class="form-group">
+              <label for="detail-prev-hash">Previous Hash:</label>
+              <div id="detail-prev-hash" class="code-box"></div>
+            </div>
+            <div class="form-group">
+              <label for="detail-merkle-root">Merkle Root:</label>
+              <div id="detail-merkle-root" class="code-box"></div>
+            </div>
+            <div class="grid-3 margin-top-sm">
+              <div><span class="hash-label">Nonce:</span> <span id="detail-nonce" class="value"></span></div>
+              <div><span class="hash-label">Difficulty:</span> <span id="detail-difficulty" class="value"></span></div>
+              <div><span class="hash-label">Timestamp:</span> <span id="detail-timestamp" class="value"></span></div>
+            </div>
+          </div>
+          <div>
+            <h3 class="panel-header-accent">Transactions (<span id="detail-tx-count">0</span>)</h3>
+            <div id="detail-tx-list" class="scrollable-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Wallet Studio -->
+    <section id="tab-wallet" class="tab-pane">
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-header">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              ECDSA Wallet Generator
+            </h2>
+          </div>
+          <p class="text-secondary-desc">
+            Generate an asymmetric cryptographic keypair using the standard SECP256k1 elliptic curve. The public key derives your unique blockchain address (0x...), and your private key digitally signs transactions.
+          </p>
+          <button id="btn-create-wallet" class="btn btn-primary btn-block">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Generate New Cryptographic Keypair
+          </button>
+
+          <div class="preset-container">
+            <span class="preset-label">Or Load Preset Demo Wallets (from Synopsis):</span>
+            <div class="flex-row-gap">
+              <button id="btn-load-vinny" class="btn btn-secondary btn-sm flex-1">Load Vinny's Wallet</button>
+              <button id="btn-load-kinny" class="btn btn-secondary btn-sm flex-1">Load Kinny's Wallet</button>
+              <button id="btn-load-miner" class="btn btn-secondary btn-sm flex-1">Load Miner Wallet</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header">
+            <h2>Active Wallet Credentials</h2>
+            <div id="wallet-balance-badge" class="stat-pill">
+              <span class="label">Balance:</span>
+              <span class="value" id="wallet-balance">0.00</span>
+              <span class="label">Tokens</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="active-wallet-address">Public Address:</label>
+            <div id="active-wallet-address" class="code-box">No wallet generated yet</div>
+          </div>
+          <div class="form-group">
+            <label for="active-wallet-pubkey">Public Key (SubjectPublicKeyInfo PEM):</label>
+            <textarea id="active-wallet-pubkey" class="form-control" rows="3" readonly placeholder="Public key PEM" title="Public Key PEM"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="active-wallet-privkey">Private Key (PKCS#8 PEM - Keep Secret!):</label>
+            <textarea id="active-wallet-privkey" class="form-control" rows="3" readonly placeholder="Private key PEM" title="Private Key PEM"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Transaction Hub -->
+    <section id="tab-transaction" class="tab-pane">
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-header">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Build & Sign Transaction
+            </h2>
+          </div>
+          <form id="form-transaction">
+            <div class="form-group">
+              <label for="tx-sender">Sender Address:</label>
+              <input type="text" id="tx-sender" class="form-control" required placeholder="0x..." title="Sender Address">
+            </div>
+            <div class="form-group">
+              <label for="tx-recipient">Recipient Address:</label>
+              <input type="text" id="tx-recipient" class="form-control" required placeholder="0x..." title="Recipient Address">
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="tx-amount">Transfer Amount:</label>
+                <input type="number" id="tx-amount" class="form-control" step="0.1" min="0.1" required placeholder="10.0" title="Transfer Amount">
+              </div>
+              <div class="form-group">
+                <label for="tx-fee">Network Fee:</label>
+                <input type="number" id="tx-fee" class="form-control" step="0.01" min="0" value="0.0" placeholder="0.0" title="Network Fee">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tx-privkey">Sender Private Key (PEM to sign payload):</label>
+              <textarea id="tx-privkey" class="form-control" rows="3" required placeholder="-----BEGIN PRIVATE KEY----- ..." title="Sender Private Key"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Cryptographically Sign & Broadcast
+            </button>
+          </form>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header">
+            <h2>Mempool (Pending Transactions)</h2>
+            <button id="btn-refresh-mempool" class="btn btn-secondary btn-sm">Refresh Mempool</button>
+          </div>
+          <div id="mempool-list" class="mempool-container">
+            <!-- Pending tx items rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Mining Center -->
+    <section id="tab-mining" class="tab-pane">
+      <div class="glass-card">
+        <div class="card-header">
+          <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Proof-of-Work Mining Engine
+          </h2>
+          <div class="stat-pill">
+            <span class="label">Mining Reward:</span>
+            <span class="value" id="mine-reward-display">25.0</span>
+            <span class="label">Tokens</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <p class="text-secondary-desc">
+              The mining engine aggregates pending transactions from the mempool, computes their Merkle root, appends a coinbase reward transaction for the miner, and iterates a cryptographic nonce until the block header hash satisfies the difficulty target (leading zeros).
+            </p>
+            <div class="form-group">
+              <label for="miner-address">Miner Beneficiary Address (Receives Reward):</label>
+              <input type="text" id="miner-address" class="form-control" placeholder="0xMinerAddress..." title="Miner Beneficiary Address">
+            </div>
+            <button id="btn-mine-block" class="btn btn-primary btn-block">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Mine Next Block Now
+            </button>
+          </div>
+
+          <div id="mining-output-box" class="console-box">
+            <h3 class="panel-header-sub">Mining Console & Telemetry</h3>
+            <div id="mining-console-log" class="console-log">
+              &gt; Miner standby. Ready to mine pending transactions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Cryptographic Lab -->
+    <section id="tab-crypto" class="tab-pane">
+      <!-- Section A: Avalanche Effect -->
+      <div class="glass-card">
+        <div class="card-header">
+          <div>
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Cryptographic Avalanche Effect Simulator
+            </h2>
+            <div class="header-desc">Demonstrating SHA-256 sensitivity: a 1-character difference causes ~50% of the 256 bits to flip.</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="avalanche-input-1">Input 1:</label>
+            <input type="text" id="avalanche-input-1" class="form-control" value="Blockchain at myfort" title="Avalanche Input 1">
+          </div>
+          <div class="form-group">
+            <label for="avalanche-input-2">Input 2 (Minor Modification):</label>
+            <input type="text" id="avalanche-input-2" class="form-control" value="Blockchain at Myfort" title="Avalanche Input 2">
+          </div>
+        </div>
+        <button id="btn-run-avalanche" class="btn btn-secondary">Analyze Avalanche Divergence</button>
+
+        <div id="avalanche-results" class="results-container hidden">
+          <div class="grid-3 margin-bottom-sm">
+            <div class="stat-pill"><span class="label">Hamming Distance:</span> <span class="value" id="res-flipped-bits">0</span> / 256 bits</div>
+            <div class="stat-pill"><span class="label">Bit Divergence:</span> <span class="value" id="res-divergence-pct">0%</span></div>
+            <div class="stat-pill"><span class="label">Avalanche Quality:</span> <span class="value" id="res-avalanche-status">IDEAL</span></div>
+          </div>
+
+          <div class="form-group">
+            <label for="res-hash1">Hash 1 (SHA-256 Hex):</label>
+            <div id="res-hash1" class="code-box"></div>
+          </div>
+          <div class="form-group">
+            <label for="res-hash2">Hash 2 (SHA-256 Hex):</label>
+            <div id="res-hash2" class="code-box"></div>
+          </div>
+
+          <label class="preset-label">256-Bit Cryptographic Heatmap (Red = Flipped Bit, Green = Preserved Bit):</label>
+          <div class="bit-matrix-container">
+            <div id="bit-matrix" class="bit-matrix"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section B: Tamper Simulator -->
+      <div class="glass-card">
+        <div class="card-header">
+          <div>
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Consensus & Chain Tampering Attack Simulator
+            </h2>
+            <div class="header-desc">Simulate an adversary modifying a transaction inside a confirmed block to prove tamper detection.</div>
+          </div>
+        </div>
+        <p class="text-secondary-desc">
+          In a blockchain, if an attacker alters the transfer amount in a historical block, the Merkle root changes, invalidating the block hash and breaking the cryptographic linkage across all subsequent blocks.
+        </p>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="tamper-block-idx">Target Block Index to Attack:</label>
+            <input type="number" id="tamper-block-idx" class="form-control" value="1" min="0" placeholder="1" title="Target Block Index">
+          </div>
+          <div class="form-group">
+            <label for="tamper-amount">Tampered Transfer Amount:</label>
+            <input type="number" id="tamper-amount" class="form-control" value="99999" placeholder="99999" title="Tampered Transfer Amount">
+          </div>
+        </div>
+        <div class="button-row">
+          <button id="btn-tamper-block" class="btn btn-danger">Execute Tamper Attack</button>
+          <button id="btn-reset-chain" class="btn btn-secondary">Reset Blockchain to Clean Genesis</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

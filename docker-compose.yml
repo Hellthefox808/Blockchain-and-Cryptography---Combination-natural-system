@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  blockchain-node:
+    build: .
+    container_name: combo-nature-blockchain
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DIFFICULTY=2
+      - MINING_REWARD=25.0
+    restart: unless-stopped

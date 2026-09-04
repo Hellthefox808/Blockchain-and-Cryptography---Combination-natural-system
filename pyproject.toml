@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blockchain-and-cryptography-combo-nature-system"
+version = "1.0.0"
+description = "A cryptographically validated blockchain implementation featuring SHA-256 avalanche effect analysis, ECDSA keypairs, Merkle trees, and Proof-of-Work consensus."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Ravi Ranjan Singh", email = "raviranjansingh601520@gmail.com" }
+]
+keywords = ["blockchain", "cryptography", "sha256", "avalanche-effect", "ecdsa", "merkle-tree", "proof-of-work"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+]
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn[standard]>=0.22.0",
+    "cryptography>=41.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "httpx>=0.24.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+combo-blockchain = "src.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
