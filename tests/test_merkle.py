@@ -1,6 +1,5 @@
 """Unit tests for Merkle Tree computation and inclusion proofs."""
 
-import pytest
 from src.core.crypto import sha256_hex
 from src.core.merkle import MerkleTree
 

@@ -18,7 +18,6 @@ import time
 from typing import Any, Dict, List, Optional, Tuple
 
 from src.core.block import Block
-from src.core.crypto import sha256_hex
 from src.core.transaction import Transaction
 
 

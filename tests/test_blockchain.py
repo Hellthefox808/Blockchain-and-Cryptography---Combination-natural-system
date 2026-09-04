@@ -2,7 +2,6 @@
 
 import os
 import tempfile
-import pytest
 from src.core.blockchain import Blockchain
 from src.core.crypto import (
     export_private_key_pem,

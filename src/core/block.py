@@ -68,7 +68,6 @@ class Block:
         target_prefix = "0" * self.difficulty
         self.merkle_root = self.compute_merkle_root()
 
-        start_time = time.time()
         while self.nonce < max_nonce:
             current_hash = self.compute_hash()
             if current_hash.startswith(target_prefix):

@@ -17,10 +17,6 @@ from typing import Any, Union
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
-from cryptography.hazmat.primitives.asymmetric.utils import (
-    decode_dss_signature,
-    encode_dss_signature,
-)
 
 
 def sha256_hex(data: Union[str, bytes, dict, list]) -> str:

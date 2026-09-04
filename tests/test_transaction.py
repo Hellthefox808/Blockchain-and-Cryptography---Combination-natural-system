@@ -1,6 +1,5 @@
 """Unit tests for transaction logic and cryptographic signing."""
 
-import pytest
 from src.core.crypto import (
     export_private_key_pem,
     export_public_key_pem,

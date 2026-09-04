@@ -71,23 +71,29 @@ Originally initiated as an academic project concept, this codebase was inherited
 ## 2. Cryptographic Foundations
 
 ### SHA-256 & The Avalanche Effect
-A cornerstone requirement outlined in the project synopsis is demonstrating how cryptographic hash functions establish blockchain immutability via the **avalanche effect**. 
+
+A cornerstone requirement outlined in the project synopsis is demonstrating how cryptographic hash functions establish blockchain immutability via the **avalanche effect**.
 
 Under SHA-256:
+
 - Every unique input produces a deterministic 256-bit (64-hexadecimal character) output.
 - **Strict Sensitivity**: Altering a single input character causes approximately 50% of the output bits to flip, making prediction or reverse-engineering impossible.
 
 $$\text{Hamming Distance} = \sum_{i=0}^{255} (b_{1, i} \oplus b_{2, i}) \approx 128 \text{ bits}$$
 
 ### Asymmetric Cryptography (ECDSA SECP256k1)
+
 All peer-to-peer transactions utilize Elliptic Curve Digital Signature Algorithm (ECDSA) with the **SECP256k1** curve (identical to Bitcoin and Ethereum):
+
 - **Private Key**: 256-bit scalar stored securely in PKCS#8 PEM format.
 - **Public Key**: Uncompressed elliptic curve point $(x, y)$ exported in SubjectPublicKeyInfo PEM format.
 - **Wallet Address**: Formatted as `0x` followed by the first 40 hex characters of the SHA-256 digest of the uncompressed public key.
 - **Digital Signatures**: Transaction payloads are hashed and signed producing DER-encoded digital signatures, ensuring **non-repudiation** and **data integrity**.
 
 ### Merkle Trees & Inclusion Proofs
+
 Transactions within each block are organized into a binary **Merkle Tree**:
+
 - Every transaction hash forms a leaf node.
 - Nodes are hashed pairwise: $H_{parent} = \text{SHA256}(H_{left} + H_{right})$.
 - If a level has an odd number of elements, the last element is duplicated per standard Bitcoin rules.
@@ -99,7 +105,9 @@ Transactions within each block are organized into a binary **Merkle Tree**:
 ## 3. Blockchain & Consensus Engine
 
 ### Block Structure
+
 Each block consists of a cryptographically validated header and a transaction list:
+
 ```json
 {
   "index": 1,
@@ -114,12 +122,17 @@ Each block consists of a cryptographically validated header and a transaction li
 ```
 
 ### Proof-of-Work (PoW) Mining
+
 Blocks are sealed through Proof of Work:
+
 $$\text{SHA256}(\text{BlockHeader}) < \text{Target}$$
+
 The mining engine iterates the `nonce` integer until the block header hash begins with the required number of leading hexadecimal zeros (difficulty target). Successful mining awards a configurable coinbase reward (default: 25.0 tokens) to the miner's address.
 
 ### Tamper Detection & Avalanche Resistance
+
 If an adversary attempts to modify transaction data in any historical block:
+
 1. The transaction hash changes.
 2. The block's calculated Merkle root fails to match the header `merkle_root`.
 3. The block hash fails verification.
@@ -146,10 +159,12 @@ The application provides a built-in Single Page Application dashboard served dir
 ## 5. Engineering Provenance & Contributions
 
 ### Inherited Baseline
+
 - **Inherited Artifacts**: A conceptual 6-page project synopsis (`Blockchain+Crypto Synopsis .pdf`) and an unfinished Google Colab notebook stub (`BlockchainProject_D.ipynb`) containing basic hash functions and promotional marketing text.
 - **Original Authorship**: Conceptual project design and synopsis created by original contributors.
 
 ### Engineering Contributions
+
 - **Full Cryptographic Core**: Built pure-Python implementation of SHA-256 bitwise analysis, ECDSA SECP256k1 key generation, digital signing, and address derivation using `cryptography`.
 - **Merkle Tree Engine**: Implemented complete binary Merkle tree with root generation and SPV audit proofs.
 - **Consensus & Ledger**: Engineered Proof-of-Work mining loop, genesis block generation, mempool queue, balance accounting with double-spend prevention, and chain validation.
@@ -164,10 +179,12 @@ The application provides a built-in Single Page Application dashboard served dir
 ## 6. Installation & Quick Start
 
 ### Prerequisites
+
 - Python 3.9+ installed
 - Git
 
 ### Local Setup
+
 ```bash
 # 1. Clone repository
 git clone https://github.com/Hellthefox808/Blockchain-and-Cryptography---Combination-natural-system.git
@@ -188,6 +205,7 @@ uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Open your browser and navigate to:
+
 - **Interactive Web Dashboard**: [http://localhost:8000/](http://localhost:8000/)
 - **Interactive OpenAPI (Swagger) Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Alternative Redoc API Documentation**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
@@ -197,7 +215,7 @@ Open your browser and navigate to:
 ## 7. REST API Documentation
 
 | Method | Endpoint | Description |
-|---|---|---|
+| :--- | :--- | :--- |
 | `GET` | `/health` | System health check |
 | `GET` | `/api/stats` | Blockchain height, difficulty, validity, and mempool counts |
 | `POST` | `/api/wallet/create` | Generate new ECDSA keypair and address |
@@ -226,6 +244,7 @@ pytest -v tests/
 ```
 
 Test coverage includes:
+
 - `tests/test_crypto.py`: SHA-256 determinism, binary conversions, avalanche Hamming distance (40%-60%), ECDSA key generation, valid/tampered digital signature checks.
 - `tests/test_merkle.py`: Empty trees, odd/even transaction lists, Merkle root verification, SPV inclusion proofs.
 - `tests/test_transaction.py`: Coinbase rewards, digital signing, tamper detection, and JSON roundtripping.
@@ -237,6 +256,7 @@ Test coverage includes:
 ## 9. Docker & Production Deployment
 
 ### Running with Docker
+
 ```bash
 # Build Docker image
 docker build -t combo-nature-blockchain .
@@ -246,6 +266,7 @@ docker run -d -p 8000:8000 --name blockchain-node combo-nature-blockchain
 ```
 
 ### Running with Docker Compose
+
 ```bash
 docker-compose up -d
 ```

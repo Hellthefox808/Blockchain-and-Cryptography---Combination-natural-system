@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, status
 
 from src.api.models import (
@@ -30,7 +30,6 @@ from src.core.crypto import (
     generate_keypair,
     get_address_from_public_key,
     load_private_key,
-    sign_data,
     verify_signature,
 )
 from src.core.transaction import Transaction

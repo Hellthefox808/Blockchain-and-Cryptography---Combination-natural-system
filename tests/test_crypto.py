@@ -1,6 +1,5 @@
 """Unit tests for cryptographic primitives."""
 
-import pytest
 from src.core.crypto import (
     calculate_avalanche_effect,
     export_private_key_pem,
